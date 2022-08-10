@@ -1,0 +1,27 @@
+{
+  "name": "greenwood-counter-jsx",
+  "version": "1.0.0",
+  "description": "A counter component example using Greenwood with WCC + JSX.",
+  "type": "module",
+  "repository": "git@github.com:thescientist13/greenwood-counter-jsx.git",
+  "author": "Owen Buckley <owen@thegreenhouse.io>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.14.0"
+  },
+  "scripts": {
+    "clean": "rimraf ./public ./reports",
+    "build": "node --experimental-loader ./node_modules/wc-compiler/src/jsx-loader.js ./node_modules/.bin/greenwood build",
+    "develop": "greenwood develop",
+    "serve": "npm run clean && node --experimental-loader ./node_modules/wc-compiler/src/jsx-loader.js ./node_modules/.bin/greenwood serve",
+    "start": "npm run develop"
+  },
+  "overrides": {
+    "wc-compiler": "https://github.com/ProjectEvergreen/wcc#feature/issue-69-jsx-transformations"
+  },
+  "devDependencies": {
+    "@greenwood/cli": "^0.26.0",
+    "eslint": "^8.20.0",
+    "rimraf": "^2.6.2"
+  }
+}
