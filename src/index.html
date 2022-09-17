@@ -32,6 +32,41 @@
     </style>
 
     <script type="module" src="./components/counter/counter.jsx?type=jsx"></script>
+    <script>
+      let counter;
+      let interval;
+
+      function startIncrement() {
+        interval = setInterval(() => {
+          let current = parseInt(counter.getAttribute('count'));
+          const next = current
+            ? current += 1
+            : 1; // use 1 since 0 is the default value
+
+          counter.setAttribute('count', next);
+        }, 3000);
+      }
+
+      function stopIncrement() {
+        clearInterval(interval);
+      }
+
+      window.addEventListener('load', () => {
+        counter = document.getElementsByTagName('wcc-counter')[0];
+
+        document.getElementById('start').addEventListener('click', () => {
+          startIncrement();
+        })
+
+        document.getElementById('stop').addEventListener('click', () => {
+          stopIncrement();
+        })
+
+        document.getElementById('reset').addEventListener('click', () => {
+          counter.setAttribute('count', 0);
+        })
+      })
+    </script>
   </head>
 
   <body>
@@ -39,7 +74,9 @@
       
       <h1>Counter</h1>
       <wcc-counter></wcc-counter>
-      
+      <button id="start">Start</button>
+      <button id="stop">Stop</button>
+      <button id="reset">Reset</button>
     </main>
   </body>
 
