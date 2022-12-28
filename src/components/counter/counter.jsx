@@ -14,7 +14,7 @@ export default class Counter extends HTMLElement {
     return (
       <div>
         <button onclick={this.count -= 1}> -</button>
-        <span>You have clicked <span class="red">{count}</span> times</span>
+        <span>You have clicked <span class="red">{count} times</span> !!!</span>
         <button onclick={this.count += 1}> +</button>
       </div>
     );
