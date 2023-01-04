@@ -38,10 +38,9 @@
 
       function startIncrement() {
         interval = setInterval(() => {
-          let current = parseInt(counter.getAttribute('count'));
-          const next = current
-            ? current += 1
-            : 1; // use 1 since 0 is the default value
+          // TODO - counter depends on fine grained observability WIP
+          // https://github.com/ProjectEvergreen/wcc/pull/110
+          const next = parseInt(counter.getAttribute('count'), 10) + 1;
 
           counter.setAttribute('count', next);
         }, 3000);
@@ -54,17 +53,19 @@
       window.addEventListener('load', () => {
         counter = document.getElementsByTagName('wcc-counter')[0];
 
+        counter.setAttribute('count', 0);
+
         document.getElementById('start').addEventListener('click', () => {
           startIncrement();
-        })
+        });
 
         document.getElementById('stop').addEventListener('click', () => {
           stopIncrement();
-        })
+        });
 
         document.getElementById('reset').addEventListener('click', () => {
           counter.setAttribute('count', 0);
-        })
+        });
       })
     </script>
   </head>
