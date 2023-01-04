@@ -1,3 +1,5 @@
+import '../badge/badge.jsx';
+
 export const inferredObservability = true;
 
 export default class Counter extends HTMLElement {
@@ -16,7 +18,7 @@ export default class Counter extends HTMLElement {
     return (
       <div>
         <button onclick={this.count -= 1}> -</button>
-        <span>You have clicked {count} times !!!</span>
+        <span>You have clicked <wcc-badge counter={count}></wcc-badge> times !!!</span>
         <button onclick={this.count += 1}> +</button>
       </div>
     );
