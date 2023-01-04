@@ -1,3 +1,5 @@
+export const inferredObservability = true;
+
 export default class Counter extends HTMLElement {
   constructor() {
     super();
@@ -14,7 +16,7 @@ export default class Counter extends HTMLElement {
     return (
       <div>
         <button onclick={this.count -= 1}> -</button>
-        <span>You have clicked <span class="red">{count} times</span> !!!</span>
+        <span>You have clicked {count} times !!!</span>
         <button onclick={this.count += 1}> +</button>
       </div>
     );
