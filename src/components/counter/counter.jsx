@@ -1,4 +1,4 @@
-import '../badge/badge.jsx';
+import '../badge/badge.jsx?type=jsx';
 
 export const inferredObservability = true;
 
