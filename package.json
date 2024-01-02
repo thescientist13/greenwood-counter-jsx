@@ -11,16 +11,17 @@
   },
   "scripts": {
     "clean": "rimraf ./public ./reports",
-    "build": "node --experimental-loader ./node_modules/wc-compiler/src/jsx-loader.js ./node_modules/.bin/greenwood build",
-    "develop": "greenwood develop",
-    "serve": "npm run clean && node --experimental-loader ./node_modules/wc-compiler/src/jsx-loader.js ./node_modules/.bin/greenwood serve",
-    "start": "npm run develop"
+    "build": "greenwood build",
+    "dev": "greenwood develop",
+    "serve": "greenwood serve",
+    "start": "npm run clean && npm run build && npm run serve"
   },
   "overrides": {
-    "wc-compiler": "~0.6.0"
+    "wc-compiler": "~0.10.0"
   },
   "devDependencies": {
-    "@greenwood/cli": "^0.26.0",
+    "@greenwood/cli": "~0.29.0",
+    "@greenwood/plugin-import-jsx": "~0.29.0",
     "eslint": "^8.20.0",
     "rimraf": "^2.6.2"
   }
