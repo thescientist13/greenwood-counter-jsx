@@ -6,9 +6,6 @@
   "repository": "git@github.com:thescientist13/greenwood-counter-jsx.git",
   "author": "Owen Buckley <owen@thegreenhouse.io>",
   "license": "MIT",
-  "engines": {
-    "node": ">=16.14.0"
-  },
   "scripts": {
     "build": "greenwood build",
     "dev": "greenwood develop",
