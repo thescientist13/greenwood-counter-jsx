@@ -10,19 +10,13 @@
     "node": ">=16.14.0"
   },
   "scripts": {
-    "clean": "rimraf ./public ./reports",
     "build": "greenwood build",
     "dev": "greenwood develop",
     "serve": "greenwood serve",
-    "start": "npm run clean && npm run build && npm run serve"
-  },
-  "overrides": {
-    "wc-compiler": "~0.10.0"
+    "start": "npm run build && npm run serve"
   },
   "devDependencies": {
-    "@greenwood/cli": "~0.29.0",
-    "@greenwood/plugin-import-jsx": "~0.29.0",
-    "eslint": "^8.20.0",
-    "rimraf": "^2.6.2"
+    "@greenwood/cli": "~0.34.0-alpha.2",
+    "@greenwood/plugin-import-jsx": "~0.34.0-alpha.2"
   }
 }
