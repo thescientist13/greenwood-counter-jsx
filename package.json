@@ -16,7 +16,6 @@
   "devDependencies": {
     "@greenwood/cli": "~0.34.0-alpha.2",
     "@greenwood/plugin-import-jsx": "~0.34.0-alpha.2",
-    "eslint": "^8.20.0",
     "patch-package": "^8.0.0"
   }
 }
