@@ -38,8 +38,6 @@
 
       function startIncrement() {
         interval = setInterval(() => {
-          // TODO - counter depends on fine grained observability WIP
-          // https://github.com/ProjectEvergreen/wcc/pull/110
           const next = parseInt(counter.getAttribute('count'), 10) + 1 || 1;
 
           console.log({ next });
