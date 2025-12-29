@@ -10,10 +10,12 @@
     "build": "greenwood build",
     "dev": "greenwood develop",
     "serve": "greenwood serve",
-    "start": "npm run build && npm run serve"
+    "start": "npm run build && npm run serve",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "@greenwood/cli": "~0.34.0-alpha.2",
-    "@greenwood/plugin-import-jsx": "~0.34.0-alpha.2"
+    "@greenwood/plugin-import-jsx": "~0.34.0-alpha.2",
+    "patch-package": "^8.0.0"
   }
 }
