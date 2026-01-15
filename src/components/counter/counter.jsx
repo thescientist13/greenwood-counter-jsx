@@ -1,3 +1,5 @@
+export const inferredObservability = true;
+
 export default class Counter extends HTMLElement {
   constructor() {
     super();
@@ -7,7 +9,8 @@ export default class Counter extends HTMLElement {
   connectedCallback() {
     this.render();
   }
-
+  // function reference is not working
+  // <button onclick={this.increment}> +</button>
   render() {
     const { count } = this;
 
