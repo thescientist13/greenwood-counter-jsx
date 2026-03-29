@@ -11,7 +11,8 @@
     "dev": "greenwood develop",
     "serve": "greenwood serve",
     "start": "npm run build && npm run serve",
-    "check": "tsc"
+    "check": "tsc",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "@greenwood/cli": "~0.34.0-alpha.4",
