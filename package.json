@@ -10,10 +10,16 @@
     "build": "greenwood build",
     "dev": "greenwood develop",
     "serve": "greenwood serve",
-    "start": "npm run build && npm run serve"
+    "start": "npm run build && npm run serve",
+    "check": "tsc"
   },
   "devDependencies": {
-    "@greenwood/cli": "~0.34.0-alpha.2",
-    "@greenwood/plugin-import-jsx": "~0.34.0-alpha.2"
+    "@greenwood/cli": "~0.34.0-alpha.4",
+    "@greenwood/plugin-import-jsx": "~0.34.0-alpha.4",
+    "patch-package": "^8.0.1",
+    "typescript": "^6.0.2"
+  },
+  "dependencies": {
+    "signal-polyfill": "^0.2.2"
   }
 }

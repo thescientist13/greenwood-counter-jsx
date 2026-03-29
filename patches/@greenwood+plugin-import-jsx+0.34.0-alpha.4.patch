@@ -1,0 +1,64 @@
+diff --git a/node_modules/@greenwood/plugin-import-jsx/src/index.js b/node_modules/@greenwood/plugin-import-jsx/src/index.js
+index 5fe6e11..45af38d 100644
+--- a/node_modules/@greenwood/plugin-import-jsx/src/index.js
++++ b/node_modules/@greenwood/plugin-import-jsx/src/index.js
+@@ -4,7 +4,13 @@
+  *
+  */
+ import { generate } from "astring";
+-import { parseJsx } from "wc-compiler/src/jsx-loader.js";
++import { parseJsx } from "wc-compiler/jsx-loader.js";
++import { mergeImportMap } from "@greenwood/cli/src/lib/node-modules-utils.js";
++
++const importMap = {
++  "signal-polyfill": "/node_modules/signal-polyfill/dist/index.js",
++  "wc-compiler/effect": "/node_modules/wc-compiler/src/effect.js"
++};
+ 
+ class ImportJsxResource {
+   constructor(compilation, options) {
+@@ -12,6 +18,7 @@ class ImportJsxResource {
+     this.extensions = ["jsx", "tsx"];
+     this.contentType = "text/javascript";
+     this.servePage = options.servePages ? "dynamic" : null;
++    this.signals = options.signals;
+   }
+ 
+   async shouldServe(url) {
+@@ -33,6 +40,24 @@ class ImportJsxResource {
+       }),
+     });
+   }
++
++  async shouldIntercept(url, request, response) {
++    return this.signals && response.headers.get("Content-Type")?.indexOf("text/html") >= 0;
++  }
++
++  async intercept(url, request, response) {
++    const { polyfills } = this.compilation.config;
++    const body = await response.text();
++    let newBody = body;
++
++    if (process.env.__GWD_COMMAND__ === "develop") {
++      newBody = mergeImportMap(body, importMap, polyfills.importMaps);
++    }
++
++    // TODO: signals global re-assignment
++
++    return new Response(newBody);
++  }
+ }
+ 
+ /** @type {import('./types/index.d.ts').ImportJsxPlugin} */
+diff --git a/node_modules/@greenwood/plugin-import-jsx/src/types/index.d.ts b/node_modules/@greenwood/plugin-import-jsx/src/types/index.d.ts
+index 1f181ad..0ebc1ba 100644
+--- a/node_modules/@greenwood/plugin-import-jsx/src/types/index.d.ts
++++ b/node_modules/@greenwood/plugin-import-jsx/src/types/index.d.ts
+@@ -2,6 +2,7 @@ import type { ResourcePlugin } from "@greenwood/cli";
+ 
+ type Options = {
+   servePages?: boolean;
++  signals?: boolean;
+ };
+ 
+ export type ImportJsxPlugin = (options?: Options) => [ResourcePlugin];
