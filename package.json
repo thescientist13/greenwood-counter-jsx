@@ -14,13 +14,13 @@
     "check": "tsc",
     "postinstall": "patch-package"
   },
+  "dependencies": {
+    "signal-polyfill": "^0.2.2"
+  },
   "devDependencies": {
     "@greenwood/cli": "~0.34.0-alpha.4",
     "@greenwood/plugin-import-jsx": "~0.34.0-alpha.4",
     "patch-package": "^8.0.1",
     "typescript": "^6.0.2"
-  },
-  "dependencies": {
-    "signal-polyfill": "^0.2.2"
   }
 }
