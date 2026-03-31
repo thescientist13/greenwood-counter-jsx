@@ -1,14 +1,15 @@
 diff --git a/node_modules/@greenwood/plugin-import-jsx/src/index.js b/node_modules/@greenwood/plugin-import-jsx/src/index.js
-index 5fe6e11..45af38d 100644
+index 5fe6e11..736cab1 100644
 --- a/node_modules/@greenwood/plugin-import-jsx/src/index.js
 +++ b/node_modules/@greenwood/plugin-import-jsx/src/index.js
-@@ -4,7 +4,13 @@
+@@ -4,7 +4,14 @@
   *
   */
  import { generate } from "astring";
 -import { parseJsx } from "wc-compiler/src/jsx-loader.js";
 +import { parseJsx } from "wc-compiler/jsx-loader.js";
 +import { mergeImportMap } from "@greenwood/cli/src/lib/node-modules-utils.js";
++import { parse } from "node-html-parser";
 +
 +const importMap = {
 +  "signal-polyfill": "/node_modules/signal-polyfill/dist/index.js",
@@ -17,7 +18,7 @@ index 5fe6e11..45af38d 100644
  
  class ImportJsxResource {
    constructor(compilation, options) {
-@@ -12,6 +18,7 @@ class ImportJsxResource {
+@@ -12,6 +19,7 @@ class ImportJsxResource {
      this.extensions = ["jsx", "tsx"];
      this.contentType = "text/javascript";
      this.servePage = options.servePages ? "dynamic" : null;
@@ -25,7 +26,7 @@ index 5fe6e11..45af38d 100644
    }
  
    async shouldServe(url) {
-@@ -33,6 +40,24 @@ class ImportJsxResource {
+@@ -33,6 +41,42 @@ class ImportJsxResource {
        }),
      });
    }
@@ -40,10 +41,28 @@ index 5fe6e11..45af38d 100644
 +    let newBody = body;
 +
 +    if (process.env.__GWD_COMMAND__ === "develop") {
-+      newBody = mergeImportMap(body, importMap, polyfills.importMaps);
++      newBody = mergeImportMap(newBody, importMap, polyfills.importMaps);
 +    }
 +
-+    // TODO: signals global re-assignment
++    const root = parse(newBody);
++    const signalScript = parse(`
++      <script type="module">
++        import { Signal } from 'signal-polyfill';
++        globalThis.Signal = Signal;
++        </script>
++      `,
++    );
++
++    // find the import map script in root and insert the signal polyfill script after it
++    const importMapScript = root.querySelector('script[type="importmap"], script[type="importmap-shim"]');
++
++    if (importMapScript) {
++      importMapScript.after(signalScript);
++    } else {
++      root.querySelector("head").prepend(signalScript);
++    }
++
++    newBody = root.toString();
 +
 +    return new Response(newBody);
 +  }
