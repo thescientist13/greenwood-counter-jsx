@@ -11,11 +11,13 @@
     "dev": "greenwood develop",
     "serve": "greenwood serve",
     "start": "npm run build && npm run serve",
-    "check": "tsc"
+    "check": "tsc",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "@greenwood/cli": "~0.34.0-alpha.5",
     "@greenwood/plugin-import-jsx": "~0.34.0-alpha.5",
-    "typescript": "^6.0.2"
+    "patch-package": "^8.0.1",
+    "typescript": "^6.0.3"
   }
 }
