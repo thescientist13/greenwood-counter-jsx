@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    // minimum required configuration
+    "target": "es2020", // needs to be at least >= es2015 for `class` support
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+
+    // additional recommended configuration
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
+    "skipLibCheck": true,
+
+    // WCC <> JSX support
+    "jsx": "preserve",
+    "jsxImportSource": "wc-compiler",
+  },
+
+  "exclude": ["./public/", "./greenwood/", "node_modules"],
+}
